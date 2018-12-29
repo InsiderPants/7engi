@@ -1,0 +1,121 @@
+----------------------------------------------------------------------
+=-=-=-=-=-=-  MongoDB Commands  -=-=-=-=-=-=
+>>mongod 	: start mongo server
+>>mongo  	: open mongo console to write commands
+>>help   	: shows available commands
+>>use	 	: use database if exists, otherwise create and use
+		  	  Ex; use databasename
+>>show dbs or show collections
+>>insert	: insert data.
+			  Ex; db.dogs.insert({name:"Jimmy",age:"19"})
+			  dogs is collection here
+>>find		: find data
+			  Ex; db.dogs.find()
+			      db.dogs.find({name:"Jimmy"})
+>>update	: update data  
+			  Ex; db.dogs.update({name:"Jimmy"},{$set:{age:"21",
+			  						isCool:true}})
+>>remove	: remove data
+			  Ex; db.dogs.remove({name:"Jimmy"}) // remove all data with name Jimmy
+			      db.dogs.remove(same).limit(1) // remove one
+----------------------------------------------------------------------
+=-=-=-=-=-=-  Mongoose Commands  -=-=-=-=-=-=
+
+=====BASICS=====
+
+>>mongoose.connect(dbpath,{useNewUrlParser:true})
+		  .then(()=> console.log("Connected to database"))
+		  .catch((err)=>console.log(err));
+
+>>var catSchema = new mongoose.Schema({Object in json format})
+
+>> var CatModel = mongoose.model("Cat",catSchema) // it's a class not object
+// Models are collectsion. So "Cat" here will become cats in collections
+
+>> Create & Save
+	CatModel.create({dataObject},(err,cat)=>{do whatever})
+
+>> CatModel.find({object},(err,cats)=>{do whatever})
+
+Another way
+>> var kitty = new CatModel({dataObject})
+>> kitty.save((err,cat)=>{do whatever})
+
+=====ADVANCED=====
+
+>> Saving Document
+	async function createCat(object){
+			const cat = new CatModel(object);
+			const result = await cat.save();
+			console.log(result);
+		}
+	createCat(obj);
+
+>> Querying a document
+	async function findCat(){
+			const cats = await CatModel.find();
+			console.log(cats)
+		}
+
+>> Advanced Find
+	const cat = await CatModel
+					  .find({name:"Meow"})
+					  .limit(10)
+					  .sort({age:1})  //1 for asc, -1 for desc
+					  .select({age:1,color:1}); // select the properties
+					  						// we want to return
+
+>> Updating doc by querying
+	async function updateCat(id){
+			const cat = await CatModel.findbyID(id);
+			if(!cat) return;
+			cat.name='New Name';
+			cat.age=20;
+			const result = await cat.save();
+			console.log(result);
+		}
+
+	Another way
+	async function updateCat(id){
+			const cat = await CatModel.findbyID(id);
+			if(!cat) return;
+			cat.set({
+			name:"New Name",age:20
+			})
+		}
+
+>> Updating doc by querying
+	async function updateCat(id){
+			const cat = await CatModel.findbyID(id);
+			if(!cat) return;
+			cat.name='New Name';
+			cat.age=20;
+			const result = await cat.save();
+			console.log(result);
+		}
+
+
+=====Advanced Querying=====
+
+>> Comparison Operators: eq(equal),ne(not equal),gt,gte,lt,lte,in,nin
+	USE: .find({age:{$gt:10}});
+	or   .find({age:{$gt:10,$lt:20}});
+	or   .find({age:{$in:[10,15,20]}});
+
+>> Logic Operator: or, and
+	USE: .find(whatever)
+		 .or([{name:"Jimmy"},{color:"red"}])
+		 .and([{name:"Jimmy"},{color:"red"}])
+
+>> Count: return the count of matches instead of properties
+	USE: .find(whatever)
+		 .count() 		// instead of select, use count
+
+>> Pagination:
+	USE: .find(whatever)
+		 .skip((pageNumber-1)*pageSize)
+		 .limit(pageSize)
+
+>> Regular Expressions
+----------------------------------------------------------------------
+=-=-=-=-=-=-  Node and Express -=-=-=-=-=-=

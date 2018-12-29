@@ -1,0 +1,31 @@
+* npm init with entry point as server.js
+
+* npm install express mongoose passport passport-jwt jsonwebtoken body-parser bcryptjs validator
+
+* npm install -D nodemon
+
+* we can do nodemon server.js or node server.js but it's better to add a npm script to do this.
+In package.json, we add scripts - start and server
+To run start - npm start
+To run server - npm run server
+
+* run : mongod --dbpath /home/dabasajay/Desktop/movie-buzz/mongoData
+run : mongo
+and get the address. Ex 127.0.0.1:27017
+run robo3t and connect
+
+* FOR FRONTEND REACT APP:
+	npm start : start dev server
+	npm run build : bundles app into static files for production
+	npm test : start test runner
+
+* npm i concurrently
+	-> To be able to run both servers in 1 command
+	-> Changes in scripts in package.json:
+	    "client-install": "npm install --prefix client",
+	    "start": "node server.js",
+	    "server": "nodemon server.js",
+	    "client": "npm start --prefix client",
+	    "dev": "concurrently \"npm run server\" \"npm run client\""
+
+* npm i react-router-dom in client NOT server
