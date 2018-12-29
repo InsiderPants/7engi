@@ -7,3 +7,8 @@ API Details:
 		Post : send similar users from the info user provide
 		Public access
 	-
+
+Data Models Details:
+
+User Model:
+	- fields :- name(S), batchYear(N), batchName(S), batchRollNo(N), gradeMA102(N), gradeAP102(N), gradeEE102(N), gradeCO102(N), gradeME102(N), gradeEN102(N), cgpa(N)
