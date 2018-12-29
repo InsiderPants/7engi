@@ -19,11 +19,11 @@ app.use('/api/search',searchAPI);
 
 // For any unexpected get route
 app.get('*',(req,res)=>{
-	res.send("Page Not Found");
+	res.status(404).send("Page Not Found");
 })
 // For any unexpected post rout
 app.post('*',(req,res)=>{
-	res.send("Page Not Found");
+	res.status(404).send("Page Not Found");
 })
 
 const port = process.env.PORT || "8000";
