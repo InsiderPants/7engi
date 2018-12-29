@@ -4,7 +4,8 @@
   "description": "Website for engineering students to find the 7 most similar students around them",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "server": "nodemon server.js"
   },
   "repository": {
     "type": "git",
