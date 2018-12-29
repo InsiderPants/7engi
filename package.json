@@ -1,0 +1,29 @@
+{
+  "name": "7engi",
+  "version": "1.0.0",
+  "description": "Website for engineering students to find the 7 most similar students around them",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server":"nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dabasajay/7engi.git"
+  },
+  "author": "Ajay Dabas, Manish Pant",
+  "license": "Apache",
+  "bugs": {
+    "url": "https://github.com/dabasajay/7engi/issues"
+  },
+  "homepage": "https://github.com/dabasajay/7engi#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.1",
+    "validator": "^10.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
