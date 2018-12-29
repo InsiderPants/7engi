@@ -1,0 +1,9 @@
+==== Project Structure ====
+
+API Details:
+
+/api/search/
+	-/getResults
+		Post : send similar users from the info user provide
+		Public access
+	-

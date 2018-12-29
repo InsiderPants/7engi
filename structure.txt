@@ -1,5 +1,0 @@
-==== Project Structure ====
-
-./
-	client/ : client-side
-	server.js : backend server
