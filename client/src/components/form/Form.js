@@ -49,11 +49,11 @@ class Form extends React.Component {
                     placeholder: '058'
                 }
             },
-            ma101: {
+            ma102: {
                 element: 'select',
                 value: '',
                 label: true,
-                labelText: 'Enter your Grade of ma101',
+                labelText: 'Enter your Grade of MA102',
                 config: {
                     name: 'grade_input',
                     options: [
@@ -68,11 +68,11 @@ class Form extends React.Component {
                     ]
                 }
             },
-            ap101: {
+            ap102: {
                 element: 'select',
                 value: '',
                 label: true,
-                labelText: 'Enter your Grade of ap101',
+                labelText: 'Enter your Grade of AP102',
                 config: {
                     name: 'grade_input',
                     options: [
@@ -87,11 +87,11 @@ class Form extends React.Component {
                     ]
                 }
             },
-            ac101: {
+            ee102: {
                 element: 'select',
                 value: '',
                 label: true,
-                labelText: 'Enter your Grade of ac101',
+                labelText: 'Enter your Grade of EE102',
                 config: {
                     name: 'grade_input',
                     options: [
@@ -106,11 +106,11 @@ class Form extends React.Component {
                     ]
                 }
             },
-            me101: {
+            co102: {
                 element: 'select',
                 value: '',
                 label: true,
-                labelText: 'Enter your Grade of me101',
+                labelText: 'Enter your Grade of CO102',
                 config: {
                     name: 'grade_input',
                     options: [
@@ -125,11 +125,11 @@ class Form extends React.Component {
                     ]
                 }
             },
-            me103: {
+            me102: {
                 element: 'select',
                 value: '',
                 label: true,
-                labelText: 'Enter your Grade of me103',
+                labelText: 'Enter your Grade of ME102',
                 config: {
                     name: 'grade_input',
                     options: [
@@ -144,11 +144,11 @@ class Form extends React.Component {
                     ]
                 }
             },
-            hu101: {
+            en102: {
                 element: 'select',
                 value: '',
                 label: true,
-                labelText: 'Enter your Grade of hu101',
+                labelText: 'Enter your Grade of EN102',
                 config: {
                     name: 'grade_input',
                     options: [

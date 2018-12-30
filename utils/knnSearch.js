@@ -58,7 +58,7 @@ const knnSearch = (xQuery)=>{
 			return -1;
 		results.push(distance);
 	}
-	results.sort();
+	results.sort((function(a, b){return a - b}));
 
 	// start the search
 	for(;i<database.length;i++){
@@ -71,8 +71,8 @@ const knnSearch = (xQuery)=>{
 	return results;
 }
 
-xQuery = [7,8,7,7,7,8,7.33];
-results = knnSearch(xQuery);
-console.log(results);
+// xQuery = [7,8,7,7,7,8,7.33];
+// results = knnSearch(xQuery);
+// console.log(results);
 
 module.exports =  knnSearch;
