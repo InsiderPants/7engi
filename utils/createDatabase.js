@@ -34,4 +34,6 @@ const createDatabase = ()=>{
 	}
 }
 
+createDatabase();
+
 module.exports = createDatabase

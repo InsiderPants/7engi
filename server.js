@@ -3,8 +3,7 @@ const express = require("express"),
 	  mongoose = require("mongoose"),
 	  bodyParser = require('body-parser');
 
-const searchAPI = require("./routes/api/search.js"),
-	  createDatabase = require("./utils/createDatabase.js");
+const searchAPI = require("./routes/api/search.js");
 
 // Body Parser middleware to parse request
 app.use(bodyParser.urlencoded({extended:false}));
@@ -13,14 +12,8 @@ app.use(bodyParser.json()) // if there's a json object in request, it'll populat
 // Connecting to database
 const db = require('./config/keys.js').mongoURI;
 mongoose.connect(db,{useNewUrlParser:true})
-		.then(()=> createDatabase())
+		.then(()=> console.log("Connected to database"))
 		.catch((err)=>console.log(err));
-
-async function checkDatabase(){
-	const cats = await CatModel.find();
-	console.log(cats)
-}
-
 
 // Home
 app.get('/',(req,res)=>{
