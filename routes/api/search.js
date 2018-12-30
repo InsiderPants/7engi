@@ -20,9 +20,41 @@ router.post("/getResults",(req,res)=>{
 	// do similarity search
 	results = knnSearch(features);
 	// console.log(results);
-	results.then((e)=>console.log(e))
+	Promise.all([results])
+		.then((e)=>console.log(e))
+		.catch
 	// return results in response
-	res.send(results);
+	staticObj = [
+				{
+				"Name": "Ajay",
+				"RollNo": "2K17/A4/01"
+				},
+				{
+				"Name": "Manish",
+				"RollNo": "2K17/A4/02"
+				},
+				{
+				"Name": "Piyush",
+				"RollNo": "2K17/A4/03"
+				},
+				{
+				"Name": "Sahil",
+				"RollNo": "2K17/A4/04"
+				},
+				{
+				"Name": "Mohit",
+				"RollNo": "2K17/A4/05"
+				},
+				{
+				"Name": "Abhishek",
+				"RollNo": "2K17/A4/06"
+				},
+				{
+				"Name": "Anshul",
+				"RollNo": "2K17/A4/07"
+				}
+			]
+	res.send(staticObj);
 })
 
 module.exports = router
