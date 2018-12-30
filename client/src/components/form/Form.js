@@ -242,7 +242,7 @@ class Form extends React.Component {
     }
 };
 
-export default compose(
+export default compose( //used redux here
     withRouter,
     withStyles(styles)
 )(Form);
