@@ -42,7 +42,7 @@ const userSchema = new Schema({
 	gradeEN102:{
 		type: Number,
 		required: true
-	},
+	}
 	cgpa:{
 		type: Number,
 		required: true
