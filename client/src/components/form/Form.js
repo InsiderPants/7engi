@@ -1,6 +1,19 @@
 import React from 'react';
 import axios from 'axios';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import FormFields from '../../templates/FormFields';
+
+const styles = theme => ({
+    button: {
+        margin: theme.spacing.unit,
+    },
+    root: {
+        flexGrow: 1,
+        marginTop: '2%',
+    },
+});
 
 class Form extends React.Component {
     state = {
@@ -20,7 +33,7 @@ class Form extends React.Component {
                 element: 'input',
                 value: '',
                 label: true,
-                labelText: 'BatchYear',
+                labelText: 'Batch Year',
                 config: {
                     name: 'rollno_batchyear_input',
                     type: 'text',
@@ -31,7 +44,7 @@ class Form extends React.Component {
                 element: 'input',
                 value: '',
                 label: true,
-                labelText: 'BatchNear',
+                labelText: 'Batch Name',
                 config: {
                     name: 'rollno_batchname_input',
                     type: 'text',
@@ -42,7 +55,7 @@ class Form extends React.Component {
                 element: 'input',
                 value: '',
                 label: true,
-                labelText: 'rollno',
+                labelText: 'Roll No.',
                 config: {
                     name: 'rollno_input',
                     type: 'text',
@@ -53,7 +66,7 @@ class Form extends React.Component {
                 element: 'select',
                 value: '',
                 label: true,
-                labelText: 'Enter your Grade of MA102',
+                labelText: 'MA102',
                 config: {
                     name: 'grade_input',
                     options: [
@@ -72,7 +85,7 @@ class Form extends React.Component {
                 element: 'select',
                 value: '',
                 label: true,
-                labelText: 'Enter your Grade of AP102',
+                labelText: 'AP102',
                 config: {
                     name: 'grade_input',
                     options: [
@@ -91,7 +104,7 @@ class Form extends React.Component {
                 element: 'select',
                 value: '',
                 label: true,
-                labelText: 'Enter your Grade of EE102',
+                labelText: 'EE102',
                 config: {
                     name: 'grade_input',
                     options: [
@@ -110,7 +123,7 @@ class Form extends React.Component {
                 element: 'select',
                 value: '',
                 label: true,
-                labelText: 'Enter your Grade of CO102',
+                labelText: 'CO102',
                 config: {
                     name: 'grade_input',
                     options: [
@@ -129,7 +142,7 @@ class Form extends React.Component {
                 element: 'select',
                 value: '',
                 label: true,
-                labelText: 'Enter your Grade of ME102',
+                labelText: 'ME102',
                 config: {
                     name: 'grade_input',
                     options: [
@@ -148,7 +161,7 @@ class Form extends React.Component {
                 element: 'select',
                 value: '',
                 label: true,
-                labelText: 'Enter your Grade of EN102',
+                labelText: 'EN102',
                 config: {
                     name: 'grade_input',
                     options: [
@@ -185,19 +198,42 @@ class Form extends React.Component {
     }
 
     render() {
+        const { classes } = this.props;
         return (
-            <div className = "container">
-                <form onSubmit = {this.handleSubmit}>
-                    <FormFields //template to render from fields
-                        //props
-                        formData = {this.state.formData} //this will send the state aka the configuration for input
-                        updateState = {newState => this.changeState(newState)} //for updateion of state
-                    />
-                    <button type="submit" className="submit_button">Submit</button>
-                </form>
+             <div className={classes.root} >
+                <Grid 
+                    container 
+                    justify = "center"
+                    alignItems = "center"
+                    spacing = {24}
+                >
+                    <Grid item xs={8}>
+                        <form onSubmit = {this.handleSubmit}>
+                            <Grid 
+                                container 
+                                justify = "center"
+                                alignItems = "center"
+                                spacing = {24}
+                            >
+                                <Grid item xs={12}>
+                                    <FormFields //template to render from fields
+                                        //props
+                                        formData = {this.state.formData} //this will send the state aka the configuration for input
+                                        updateState = {newState => this.changeState(newState)} //for updateion of state
+                                    />
+                                </Grid>
+                                <Grid item xs={2} justify="center" alignItems="center">
+                                    <Button type="submit" variant="outlined" color="primary" className={classes.button}>
+                                        Submit
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </form>
+                    </Grid>
+                </Grid>
             </div>
         );
     }
 };
 
-export default Form;
+export default withStyles(styles)(Form);
