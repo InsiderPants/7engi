@@ -18,6 +18,8 @@
 >>remove	: remove data
 			  Ex; db.dogs.remove({name:"Jimmy"}) // remove all data with name Jimmy
 			      db.dogs.remove(same).limit(1) // remove one
+>>drop		: drop collection
+			  Ex; db.dogs.drop()
 ----------------------------------------------------------------------
 =-=-=-=-=-=-  Mongoose Commands  -=-=-=-=-=-=
 

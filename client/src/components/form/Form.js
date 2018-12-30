@@ -191,20 +191,10 @@ class Form extends React.Component {
             else 
                 finalData[key] = this.state.formData[key].value; //setting value
         }
-        console.log(finalData);
-        console.log(this.props.history);
-        // this.props.history.push('/results');
         //NETWORK REQUEST HERE
         axios.post('/api/search/getResults', finalData)
-<<<<<<< HEAD
-            .then(res => {
-                console.log(res.data);
-
-            })
-=======
             .then(res => console.log(res.data))
             .then(() => this.props.history.push('/result'))
->>>>>>> 2f2b7d1850f8c6638477f74da2eeaf827781a780
             .catch(error => console.log(error));
     }
 

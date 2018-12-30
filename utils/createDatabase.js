@@ -1,5 +1,6 @@
-const User = require("../models/User.js")
-	  Data = require("./Data.json")
+const mongoose = require("mongoose"),
+	  User = require("../models/User.js"),
+	  Data = require("./Data.json");
 
 const gradeToNumeric = (grade)=>{
 	switch(grade){
@@ -34,6 +35,13 @@ const createDatabase = ()=>{
 	}
 }
 
-createDatabase();
+// Connecting to database
+const db = require('../config/keys.js').mongoURI;
+mongoose.connect(db,{useNewUrlParser:true})
+		.then(()=> {
+			console.log("Connected to database");
+			createDatabase();
+		})
+		.catch((err)=>console.log(err));
 
 module.exports = createDatabase

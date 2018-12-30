@@ -35,15 +35,7 @@ const userSchema = new Schema({
 		type: Number,
 		required: true
 	},
-<<<<<<< HEAD
 	CGPA:{
-=======
-	gradeEN102:{
-		type: Number,
-		required: true
-	},
-	cgpa:{
->>>>>>> 2f2b7d1850f8c6638477f74da2eeaf827781a780
 		type: Number,
 		required: true
 	}
