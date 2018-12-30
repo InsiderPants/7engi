@@ -19,7 +19,8 @@ router.post("/getResults",(req,res)=>{
 	console.log(features);
 	// do similarity search
 	results = knnSearch(features);
-
+	// console.log(results);
+	results.then((e)=>console.log(e))
 	// return results in response
 	res.send(results);
 })

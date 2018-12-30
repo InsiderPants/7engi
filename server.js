@@ -3,17 +3,17 @@ const express = require("express"),
 	  mongoose = require("mongoose"),
 	  bodyParser = require('body-parser');
 
-const searchAPI = require("./routes/api/search.js")
+const searchAPI = require("./routes/api/search.js");
 
 // Body Parser middleware to parse request
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json()) // if there's a json object in request, it'll populate it
 
 // Connecting to database
-// const db = require('./config/keys.js').mongoURI;
-// mongoose.connect(db,{useNewUrlParser:true})
-// 		.then(()=> console.log("Connected to database"))
-// 		.catch((err)=>console.log(err));
+const db = require('./config/keys.js').mongoURI;
+mongoose.connect(db,{useNewUrlParser:true})
+		.then(()=> console.log("Connected to database"))
+		.catch((err)=>console.log(err));
 
 // Home
 app.get('/',(req,res)=>{

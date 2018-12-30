@@ -9,10 +9,12 @@ In package.json, we add scripts - start and server
 To run start - npm start
 To run server - npm run server
 
-* run : mongod --dbpath /home/dabasajay/Desktop/movie-buzz/mongoData
+* run : mongod --dbpath /home/dabasajay/Desktop/7engi/mongoData
 run : mongo
 and get the address. Ex 127.0.0.1:27017
 run robo3t and connect
+
+Windows : mongod --dbpath C:/Users/thekiingslayer/Desktop/7engi/mongoData
 
 * FOR FRONTEND REACT APP:
 	npm start : start dev server

@@ -1,17 +1,7 @@
-database = [
-			[9,8,7,8,10,8,8.19],
-			[7,8,7,7,7,8,7.33],
-			[8,5,7,0,9,5,4.33],
-			[10,6,7,5,8,0,8.5],
-			[5,7,8,10,6,8,6.8],
-			[6,8,10,7,7,5,7.9],
-			[8,6,10,8,7,8,9],
-			[8,8,7,6,10,5,7.8],
-			[6,5,10,8,7,8,7.52],
-			[5,8,6,7,8,10,6.52]
-		];
+const mongoose = require("mongoose"),
+	  User = require("../models/User.js");
 
-const computeDistance = (x1,x2)=>{
+function computeDistance (x1,x2){
 	if(x1.length!=x2.length){
 		return -1;
 	}else{
@@ -24,11 +14,11 @@ const computeDistance = (x1,x2)=>{
 	}
 }
 
-const findPosition = (results,distance)=>{
+function findPosition (results,distance){
 	found = false
 	q = 0
 	for(;q<results.length;q++){
-		if(distance<results[q]){
+		if(distance<results[q]["distance"]){
 			found = true;
 			break;
 		}
@@ -38,14 +28,28 @@ const findPosition = (results,distance)=>{
 	return -1;
 }
 
-const shiftNeighbors = (results,distance,position)=>{
+function shiftNeighbors (results,student,position){
 	for(r=results.length-1;r>position;r--){
 		results[r] = results[r-1];
 	}
-	results[position] = distance;
+	results[position] = student;
 }
 
-const knnSearch = (xQuery)=>{
+// using bubble sort
+function sortFirstkNN (results){
+	for(s=0;s<results.length-1;s++){
+		for(t=0;t<results.length-s-1;t++){
+			if(results[t]["distance"]>results[t+1]["distance"]){
+				temp = results[t];
+				results[t] = results[t+1];
+				results[t+1] = temp;
+			}
+		}
+	}
+	return results;
+}
+
+async function knnSearch(xQuery){
 	// take out student features from database one by one and compute distance
 	numOfNeighbors = 7;
 
@@ -53,26 +57,42 @@ const knnSearch = (xQuery)=>{
 	results = [];
 	i=0
 	for(;i<numOfNeighbors;i++){
-		distance = computeDistance(xQuery,database[i]);
+		const students = await User.find().skip(i).limit(1);
+		student = await students[0];
+		xi = [student["MA102"],student["AP102"],student["EE102"],student["CO102"],student["ME102"],student["EN102"],student["CGPA"]]
+		distance = await computeDistance(xQuery,xi);
 		if(distance<0)
 			return -1;
-		results.push(distance);
+		student["distance"] = distance;
+		results.push(student);
 	}
-	results.sort((function(a, b){return a - b}));
-
+	results = await sortFirstkNN(results);
+	info = await User.collection.stats()
+	databaseSize = info["count"]
 	// start the search
-	for(;i<database.length;i++){
-		distance = computeDistance(xQuery,database[i]);
-		position = findPosition(results,distance);
+	for(;i<databaseSize;i++){
+		students = await User.find().skip(i).limit(1);
+		student = await students[0];
+		xi = [student["MA102"],student["AP102"],student["EE102"],student["CO102"],student["ME102"],student["EN102"],student["CGPA"]]
+		distance = await computeDistance(xQuery,xi);
+		if(distance<0)
+			return -1;
+		student["distance"] = distance;
+		position = await findPosition(results,distance);
 		if(position>=0)
-			shiftNeighbors(results,distance,position);
+			await shiftNeighbors(results,student,position);
 	}
-
-	return results;
+	return await results;
 }
 
-// xQuery = [7,8,7,7,7,8,7.33];
-// results = knnSearch(xQuery);
-// console.log(results);
+// ---TESTING---
+// Connecting to database
+// const db = require('../config/keys.js').mongoURI;
+// mongoose.connect(db,{useNewUrlParser:true})
+// 		.then(async function(){
+// 			console.log("Connected to database");
+// 			results = await knnSearch([8,9,7,7,5,8,6.53]);
+// 		})
+// 		.catch((err)=>console.log(err));
 
 module.exports =  knnSearch;
