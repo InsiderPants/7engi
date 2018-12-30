@@ -213,7 +213,7 @@ class Form extends React.Component {
                     alignItems = "center"
                     spacing = {24}
                 >
-                    <Grid item xs={8} alignContent='center'>
+                    <Grid item xs={8}>
                         <form onSubmit = {this.handleSubmit}>
                             <Grid 
                                 container 
@@ -221,14 +221,14 @@ class Form extends React.Component {
                                 alignItems = "center"
                                 spacing = {24}
                             >
-                                <Grid item xs={12} alignContent='center'>
+                                <Grid item xs={12}>
                                     <FormFields //template to render from fields
                                         //props
                                         formData = {this.state.formData} //this will send the state aka the configuration for input
                                         updateState = {newState => this.changeState(newState)} //for updateion of state
                                     />
                                 </Grid>
-                                <Grid item xs={1} alignContent='center'>
+                                <Grid item xs={1}>
                                     <Button type="submit" variant="outlined" color="primary" className={classes.button} onClick={this.redirectPage}>
                                         Submit
                                     </Button>
