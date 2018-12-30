@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import FormFields from '../../templates/FormFields';
+
 
 const styles = theme => ({
     button: {
@@ -194,10 +196,15 @@ class Form extends React.Component {
         // this.props.history.push('/results');
         //NETWORK REQUEST HERE
         axios.post('/api/search/getResults', finalData)
+<<<<<<< HEAD
             .then(res => {
                 console.log(res.data);
 
             })
+=======
+            .then(res => console.log(res.data))
+            .then(() => this.props.history.push('/result'))
+>>>>>>> 2f2b7d1850f8c6638477f74da2eeaf827781a780
             .catch(error => console.log(error));
     }
 
@@ -230,12 +237,10 @@ class Form extends React.Component {
                                         updateState = {newState => this.changeState(newState)} //for updateion of state
                                     />
                                 </Grid>
-                                <Grid item xs={2}>
-                                    <Link to='/result'>    
-                                        <Button type="submit" variant="outlined" color="primary" className={classes.button}>
-                                            Submit
-                                        </Button>
-                                    </Link>
+                                <Grid item xs={1}>
+                                    <Button type="submit" variant="outlined" color="primary" className={classes.button} onClick={this.redirectPage}>
+                                        Submit
+                                    </Button>
                                 </Grid>
                             </Grid>
                         </form>
@@ -246,4 +251,7 @@ class Form extends React.Component {
     }
 };
 
-export default withStyles(styles)(Form);
+export default compose(
+    withRouter,
+    withStyles(styles)
+)(Form);
