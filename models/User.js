@@ -3,47 +3,39 @@ const mongoose = require("mongoose"),
 
 // Create Schema
 const userSchema = new Schema({
-	name:{
+	Name:{
 		type: String,
 		required: true
 	},
-	batchYear:{
-		type: Number,
-		required: true
-	},
-	batchName:{
+	RollNo:{
 		type: String,
 		required: true
 	},
-	batchRollNo:{
+	MA102:{
 		type: Number,
 		required: true
 	},
-	gradeMA102:{
+	AP102:{
 		type: Number,
 		required: true
 	},
-	gradeAP102:{
+	EE102:{
 		type: Number,
 		required: true
 	},
-	gradeEE102:{
+	CO102:{
 		type: Number,
 		required: true
 	},
-	gradeCO102:{
+	ME102:{
 		type: Number,
 		required: true
 	},
-	gradeME102:{
+	EN102:{
 		type: Number,
 		required: true
 	},
-	gradeEN102:{
-		type: Number,
-		required: true
-	}
-	cgpa:{
+	CGPA:{
 		type: Number,
 		required: true
 	}

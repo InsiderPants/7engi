@@ -189,8 +189,15 @@ class Form extends React.Component {
                 finalData[key] = this.state.formData[key].value; //setting value
         }
         console.log(finalData);
+        console.log(this.props.history);
+        // this.props.history.push('/results');
         //NETWORK REQUEST HERE
-        axios.post('/api/search/getResults', finalData).then(res => console.log(res.data)).catch(error => console.log(error));
+        axios.post('/api/search/getResults', finalData)
+            .then(res => {
+                console.log(res.data);
+
+            })
+            .catch(error => console.log(error));
     }
 
     changeState = (data) => {
