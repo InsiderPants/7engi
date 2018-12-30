@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -176,7 +177,7 @@ class Form extends React.Component {
                     ]
                 }
             }
-        }
+        },
     }
 
     handleSubmit = (e) => { //function for handling submit data
@@ -222,10 +223,12 @@ class Form extends React.Component {
                                         updateState = {newState => this.changeState(newState)} //for updateion of state
                                     />
                                 </Grid>
-                                <Grid item xs={2} justify="center" alignItems="center">
-                                    <Button type="submit" variant="outlined" color="primary" className={classes.button}>
-                                        Submit
-                                    </Button>
+                                <Grid item xs={2}>
+                                    <Link to='/result'>    
+                                        <Button type="submit" variant="outlined" color="primary" className={classes.button}>
+                                            Submit
+                                        </Button>
+                                    </Link>
                                 </Grid>
                             </Grid>
                         </form>
