@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import FormFields from '../../templates/FormFields';
+
 
 const styles = theme => ({
     button: {
@@ -191,7 +193,10 @@ class Form extends React.Component {
         }
         console.log(finalData);
         //NETWORK REQUEST HERE
-        axios.post('/api/search/getResults', finalData).then(res => console.log(res.data)).catch(error => console.log(error));
+        axios.post('/api/search/getResults', finalData)
+            .then(res => console.log(res.data))
+            .then(() => this.props.history.push('/result'))
+            .catch(error => console.log(error));
     }
 
     changeState = (data) => {
@@ -208,7 +213,7 @@ class Form extends React.Component {
                     alignItems = "center"
                     spacing = {24}
                 >
-                    <Grid item xs={8}>
+                    <Grid item xs={8} alignContent='center'>
                         <form onSubmit = {this.handleSubmit}>
                             <Grid 
                                 container 
@@ -216,19 +221,17 @@ class Form extends React.Component {
                                 alignItems = "center"
                                 spacing = {24}
                             >
-                                <Grid item xs={12}>
+                                <Grid item xs={12} alignContent='center'>
                                     <FormFields //template to render from fields
                                         //props
                                         formData = {this.state.formData} //this will send the state aka the configuration for input
                                         updateState = {newState => this.changeState(newState)} //for updateion of state
                                     />
                                 </Grid>
-                                <Grid item xs={2}>
-                                    <Link to='/result'>    
-                                        <Button type="submit" variant="outlined" color="primary" className={classes.button}>
-                                            Submit
-                                        </Button>
-                                    </Link>
+                                <Grid item xs={1} alignContent='center'>
+                                    <Button type="submit" variant="outlined" color="primary" className={classes.button} onClick={this.redirectPage}>
+                                        Submit
+                                    </Button>
                                 </Grid>
                             </Grid>
                         </form>
@@ -239,4 +242,7 @@ class Form extends React.Component {
     }
 };
 
-export default withStyles(styles)(Form);
+export default compose(
+    withRouter,
+    withStyles(styles)
+)(Form);
