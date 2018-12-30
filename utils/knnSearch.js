@@ -5,8 +5,8 @@ function computeDistance (x1,x2){
 	if(x1.length!=x2.length){
 		return -1;
 	}else{
-		sum=0;
-		for(p=0;p<x1.length;p++){
+		let sum=0;
+		for(let p=0;p<x1.length;p++){
 			sum = sum + (x1[p]-x2[p])*(x1[p]-x2[p]);
 		}
 		sum = Math.sqrt(sum);
@@ -15,8 +15,8 @@ function computeDistance (x1,x2){
 }
 
 function findPosition (results,distance){
-	found = false
-	q = 0
+	let found = false
+	let q = 0
 	for(;q<results.length;q++){
 		if(distance<results[q]["distance"]){
 			found = true;
@@ -29,7 +29,7 @@ function findPosition (results,distance){
 }
 
 function shiftNeighbors (results,student,position){
-	for(r=results.length-1;r>position;r--){
+	for(let r=results.length-1;r>position;r--){
 		results[r] = results[r-1];
 	}
 	results[position] = student;
@@ -37,8 +37,8 @@ function shiftNeighbors (results,student,position){
 
 // using bubble sort
 function sortFirstkNN (results){
-	for(s=0;s<results.length-1;s++){
-		for(t=0;t<results.length-s-1;t++){
+	for(let s=0;s<results.length-1;s++){
+		for(let t=0;t<results.length-s-1;t++){
 			if(results[t]["distance"]>results[t+1]["distance"]){
 				temp = results[t];
 				results[t] = results[t+1];
@@ -51,13 +51,17 @@ function sortFirstkNN (results){
 
 async function knnSearch(xQuery){
 	// take out student features from database one by one and compute distance
-	numOfNeighbors = 7;
+	var numOfNeighbors = 7;
 
 	// sort first k neighbors by distance to xQuery
-	results = [];
-	i=0
+	var results = [];
+	var i=0
+	var xi;
+	var students;
+	var student;
+	var distance;
 	for(;i<numOfNeighbors;i++){
-		const students = await User.find().skip(i).limit(1);
+		students = await User.find().skip(i).limit(1);
 		student = await students[0];
 		xi = [student["MA102"],student["AP102"],student["EE102"],student["CO102"],student["ME102"],student["EN102"],student["CGPA"]]
 		distance = await computeDistance(xQuery,xi);
@@ -67,8 +71,9 @@ async function knnSearch(xQuery){
 		results.push(student);
 	}
 	results = await sortFirstkNN(results);
-	info = await User.collection.stats()
-	databaseSize = info["count"]
+	var info = await User.collection.stats()
+	var databaseSize = info["count"]
+	var position;
 	// start the search
 	for(;i<databaseSize;i++){
 		students = await User.find().skip(i).limit(1);
@@ -92,6 +97,7 @@ async function knnSearch(xQuery){
 // 		.then(async function(){
 // 			console.log("Connected to database");
 // 			results = await knnSearch([8,9,7,7,5,8,6.53]);
+// 			console.log(results);
 // 		})
 // 		.catch((err)=>console.log(err));
 
