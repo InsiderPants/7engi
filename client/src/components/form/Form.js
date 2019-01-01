@@ -3,6 +3,7 @@ import React,{Component} from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {compose} from 'redux';
@@ -213,7 +214,9 @@ class Form extends Component{
         const { classes } = this.props;
         return (
              <div className={classes.root} >
-                <Grid 
+                {this.props.isLoading ?
+                    <CircularProgress className={classes.progress} />:
+                    <Grid 
                     container 
                     justify = "center"
                     alignItems = "center"
@@ -243,6 +246,7 @@ class Form extends Component{
                         </form>
                     </Grid>
                 </Grid>
+                }
             </div>
         );
     }
@@ -251,9 +255,9 @@ class Form extends Component{
 
 
 const mapStateToProps = (state)=>({
-    resultData: state.resultData,
-    error: state.error,
-    isLoading: state.isLoading
+    resultData: state.results.resultData,
+    error: state.errors.error,
+    isLoading: state.results.isLoading
 });
 
 export default compose(
