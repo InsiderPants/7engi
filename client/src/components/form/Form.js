@@ -1,12 +1,17 @@
-import React from 'react';
-import axios from 'axios';
-import { withStyles } from '@material-ui/core/styles';
+// Libraries
+import React,{Component} from 'react';
+import {withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { withRouter } from 'react-router-dom';
-import { compose } from 'redux';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import {compose} from 'redux';
+
+// Templates
 import FormFields from '../../templates/FormFields';
 
+// Actions
+import {getResults} from '../../actions/getResults';
 
 const styles = theme => ({
     button: {
@@ -18,7 +23,13 @@ const styles = theme => ({
     },
 });
 
-class Form extends React.Component {
+class Form extends Component{
+    constructor(){
+        super();
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.changeState = this.changeState.bind(this);
+    }
+
     state = {
         formData: {
             name: {
@@ -179,10 +190,10 @@ class Form extends React.Component {
                     ]
                 }
             }
-        },
-    }
+        }
+    };
 
-    handleSubmit = (e) => { //function for handling submit data
+    handleSubmit(e){ //function for handling submit data
         e.preventDefault();
         let finalData = {}; //variable for storing data to be send to backend
         for(let key in this.state.formData) {
@@ -191,16 +202,12 @@ class Form extends React.Component {
             else 
                 finalData[key] = this.state.formData[key].value; //setting value
         }
-        //NETWORK REQUEST HERE
-        axios.post('/api/search/getResults', finalData)
-            .then(res => console.log(res.data))
-            .then(() => this.props.history.push('/result'))
-            .catch(error => console.log(error));
-    }
+        this.props.getResults(finalData);
+    };
 
-    changeState = (data) => {
+    changeState(data){
         this.setState({formData : data}); //function for setting state
-    }
+    };
 
     render() {
         const { classes } = this.props;
@@ -241,7 +248,16 @@ class Form extends React.Component {
     }
 };
 
-export default compose( //used redux here
+
+
+const mapStateToProps = (state)=>({
+    resultData: state.resultData,
+    error: state.error,
+    isLoading: state.isLoading
+});
+
+export default compose(
+    connect(mapStateToProps,{getResults}),
     withRouter,
     withStyles(styles)
 )(Form);
