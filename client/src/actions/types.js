@@ -1,0 +1,3 @@
+export const GET_ERRORS = 'GET_ERRORS';
+export const GET_RESULTS = 'GET_RESULTS';
+export const LOADING_RESULTS = 'LOADING_RESULTS';
