@@ -203,7 +203,7 @@ class Form extends Component{
             else 
                 finalData[key] = this.state.formData[key].value; //setting value
         }
-        this.props.getResults(finalData);
+        this.props.getResults(finalData, this.props.history);
     };
 
     changeState(data){
@@ -255,8 +255,6 @@ class Form extends Component{
 
 
 const mapStateToProps = (state)=>({
-    resultData: state.results.resultData,
-    error: state.errors.error,
     isLoading: state.results.isLoading
 });
 
