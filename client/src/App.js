@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 import Navbar from './components/navbar/Navbar';
 import Home from './components/home/home';
 import Result from './components/result/result';
+import AboutOurProject from './components/aboutOurProject/aboutOurProject';
 
 // Actions
 
@@ -23,6 +24,7 @@ class App extends Component{
 		                <Route exact path='/' component={Home}/>
 		                <Switch>
 		                	<Route exact path = '/results' component ={Result} />
+							<Route exact path = '/AboutOurProject' component ={AboutOurProject} />
 		                </Switch>
 	            	</div>
 	            </Router>

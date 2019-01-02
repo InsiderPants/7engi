@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -49,7 +50,7 @@ class Navbar extends React.Component {
         const sideList = (
             <div className={classes.list}>
                 <List>
-                    {['Item', 'Item', 'Item', 'Item'].map((text, index) => (
+                    {['Home','About Us'].map((text, index) => (
                         <ListItem button key={text}>
                             <ListItemText primary={text} />
                         </ListItem>
@@ -57,9 +58,11 @@ class Navbar extends React.Component {
                 </List>
                 <Divider />
                 <List>
-                    {['Item', 'Item', 'Item'].map((text, index) => (
+                    {['About Our Project'].map((text, index) => (
                         <ListItem button key={text}>
-                            <ListItemText primary={text} />
+                            <Link to='AboutOurProject' style={{textDecoration: 'none'}}>    
+                                <ListItemText primary={text} />
+                            </Link>
                         </ListItem>
                     ))}
                 </List>
