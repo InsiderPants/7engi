@@ -60,7 +60,7 @@ class Navbar extends React.Component {
                 <List>
                     {['About Our Project'].map((text, index) => (
                         <ListItem button key={text}>
-                            <Link to='AboutOurProject' style={{textDecoration: 'none'}}>    
+                            <Link to='/AboutOurProject' style={{textDecoration: 'none'}}>    
                                 <ListItemText primary={text} />
                             </Link>
                         </ListItem>
